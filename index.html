@@ -8,10 +8,18 @@
         background:transparent;
         min-height:100%;
       }
+      a{
+        display:inline-block;
+        text-decoration:none;
+      }
       a:hover{
          cursor: pointer;
+         opacity:0.7;
       }
-      iframe{
+      a,a:hover{
+        transition:.25s all;
+      }
+      #yt{
         width:100vw;
         height:100vh;
         zoom:150%;
@@ -57,28 +65,39 @@
       ul.share-buttons img{
         width: 32px;
       }
+      a.change{
+        background:#9c002d;
+        color:white;
+        padding:15px;
+        font-size:20px;
+        border-radius:5px;
+      }
     </style>
   </head>
   <body>
     <div class="clear"></div>
-    <iframe src="https://www.youtube.com/embed/FQaIPD9iL8E?autoplay=1&modestbranding=1&loop=1&playlist=FQaIPD9iL8E&disablekb=1" frameborder="0" allowfullscreen></iframe>
+    <div id="yt"></div>
     <div class="body">
+      <a href="#" style="background:white;display:inline-block;color:black;padding:10px;border-radius:5px;float:right;position:fixed;top:10;right:10;" onclick="vid.target.mute(); document.querySelector('#db').outerHTML = '';" id="db">Mute audio</a>
+
       <h1>Boston College High School's future could be in trouble.</h1>
       <p><u><b>This website was made by a group of concerned students, parents, and alumni of the class of 2017 on Sunday, May 28th 2017. It is in no way affiliated with nor endorsed by Boston College High School, the creators of the video in the background, or the people featured within.</b></u></p>
 
       <div>
-        <p>Share this website with the BCHigh Community:</p>
+        <p>After reading, share this website with the BCHigh Community:</p>
         <div class="buttonRow">
            <ul class="share-buttons">
-  <li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsavebchigh.org&t=Save%20Boston%20College%20High%20School!" title="Share on Facebook" target="_blank"><img alt="Share on Facebook" src="Facebook.svg"></a></li>
-  <li><a href="https://twitter.com/intent/tweet?source=https%3A%2F%2Fsavebchigh.org&text=Save%20Boston%20College%20High%20School!:%20https%3A%2F%2Fsavebchigh.org" target="_blank" title="Tweet"><img alt="Tweet" src="Twitter.svg"></a></li>
-  <li><a href="http://www.reddit.com/submit?url=https%3A%2F%2Fsavebchigh.org&title=Save%20Boston%20College%20High%20School!" target="_blank" title="Submit to Reddit"><img alt="Submit to Reddit" src="Reddit.svg"></a></li>
-  <li><a href="mailto:?subject=Save%20Boston%20College%20High%20School!&body=Boston%20College%20High%20School's%20future%20could%20be%20in%20jeopardy.:%20https%3A%2F%2Fsavebchigh.org" target="_blank" title="Send email"><img alt="Send email" src="Email.svg"></a></li>
-</ul>
+              <li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsavebchigh.org&t=Save%20Boston%20College%20High%20School!" title="Share on Facebook" target="_blank"><img alt="Share on Facebook" src="Facebook.svg"></a></li>
+              <li><a href="https://twitter.com/intent/tweet?source=https%3A%2F%2Fsavebchigh.org&text=Save%20Boston%20College%20High%20School!:%20https%3A%2F%2Fsavebchigh.org" target="_blank" title="Tweet"><img alt="Tweet" src="Twitter.svg"></a></li>
+              <li><a href="http://www.reddit.com/submit?url=https%3A%2F%2Fsavebchigh.org&title=Save%20Boston%20College%20High%20School!" target="_blank" title="Submit to Reddit"><img alt="Submit to Reddit" src="Reddit.svg"></a></li>
+              <li><a href="mailto:?subject=Save%20Boston%20College%20High%20School!&body=Boston%20College%20High%20School's%20future%20could%20be%20in%20jeopardy.:%20https%3A%2F%2Fsavebchigh.org" target="_blank" title="Send email"><img alt="Send email" src="Email.svg"></a></li>
+            </ul>
         </div>
+        <p>and help make a difference:</p>
+        <a class="change">Sign the Change.org Petition</a>
       </div>
       
-      <a href="#" style="background:white;display:inline-block;color:black;padding:10px;border-radius:5px;margin-top:15px; margin-bottom:15px;" onclick="document.querySelector('iframe').outerHTML = ''; document.querySelector('#db').outerHTML = '';" id="db">Disable background video/audio</a>
+      <hr> 
 
       <p>Chairman of the board, John McQuillan has called an emergency board meeting for this Wednesday at his attorney's office in Cambridge. He plans on formally dissolving the board to establish an executive group that sides with his opinions and plans for the school.</p>
 
@@ -178,22 +197,36 @@
       <p>AMDG.</p>
       </div>
     </div>
+    <script async src="https://www.youtube.com/iframe_api"></script>
+    <script>
+      var vid;
+     function onYouTubeIframeAPIReady() {
+      var player;
+      player = new YT.Player('yt', {
+        videoId: 'FQaIPD9iL8E', // YouTube Video ID
+        width: 560,               // Player width (in px)
+        height: 316,              // Player height (in px)
+        playerVars: {
+          autoplay: 1,        // Auto-play the video on load
+          controls: 1,        // Show pause/play buttons in player
+          showinfo: 0,        // Hide the video title
+          modestbranding: 1,  // Hide the Youtube Logo
+          loop: 1,            // Run the video in a loop
+          fs: 0,              // Hide the full screen button
+          cc_load_policy: 0, // Hide closed captions
+          iv_load_policy: 3,  // Hide the Video Annotations
+          autohide: 0,
+          playlist: 'FQaIPD9iL8E'        // Hide video controls when playing
+        },
+        events: {
+          onReady: function(e) {
+            vid = e;
+          }
+        }
+      });
+     }
 
-    <script>window.twttr = (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0],
-        t = window.twttr || {};
-      if (d.getElementById(id)) return t;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://platform.twitter.com/widgets.js";
-      fjs.parentNode.insertBefore(js, fjs);
-
-      t._e = [];
-      t.ready = function(f) {
-        t._e.push(f);
-      };
-
-      return t;
-    }(document, "script", "twitter-wjs"));</script>
+     // Written by @labnol 
+    </script>
   </body>
 </html>
